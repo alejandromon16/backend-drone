@@ -1,0 +1,120 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Client {
+  id: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  email: String!
+  gender: String!
+}
+
+input CreateClientInput {
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  email: String!
+  gender: String!
+}
+
+input CreateDroneInput {
+  name: String!
+  subtitle: String!
+  description: String!
+  price: Float!
+  stock: Float!
+  imageUrl: String!
+}
+
+input CreateOrderInput {
+  user: String!
+  products: [String!]!
+  totalAmount: Float!
+  status: String!
+  address: String!
+  previousState: PreviousState!
+}
+
+input CreateSellerInput {
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  email: String!
+  gender: String!
+}
+
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Drone {
+  id: String!
+  name: String!
+  subtitle: String!
+  description: String!
+  price: Float!
+  stock: Float!
+  imageUrl: String!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): UserType!
+  createSeller(createSellerInput: CreateSellerInput!): Seller!
+  createDrone(createDroneInput: CreateDroneInput!): Drone!
+  createClient(createClientInput: CreateClientInput!): Client!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+}
+
+type Order {
+  id: ID!
+  user: String!
+  products: [String!]!
+  totalAmount: Int!
+  orderDate: DateTime!
+  deliveryDate: DateTime!
+  status: String!
+  address: String!
+}
+
+enum PreviousState {
+  USADO
+  NUEVO
+}
+
+type Query {
+  user(id: String!): UserType!
+  getSeller(id: String!): Seller!
+  getSellers: [Seller!]!
+  getDrone(name: String!): Drone!
+  getDrones: [Drone!]!
+  getClient(id: String!): Client!
+  getClients: [Client!]!
+  orders: [Order!]!
+  order(id: String!): Order!
+}
+
+type Seller {
+  id: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  email: String!
+  gender: String!
+}
+
+type UserType {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+}
