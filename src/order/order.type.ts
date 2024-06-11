@@ -29,3 +29,17 @@ export class OrderType {
   address: string;
 }
 
+@ObjectType('OrderAmount')
+export class OrderAmountType {
+  @Field(() => Int)
+  ordersAmount: number;
+}
+
+@ObjectType('OrdersCreditOrQrAmount')
+export class OrdersCreditOrQrAmountType {
+  @Field(() => Int)
+  creditAmount: number;
+
+  @Field(() => Int)
+  qrAmount: number;
+}

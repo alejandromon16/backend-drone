@@ -71,6 +71,7 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): UserType!
   createSeller(createSellerInput: CreateSellerInput!): Seller!
   createDrone(createDroneInput: CreateDroneInput!): Drone!
+  updateDrone(updateDroneInput: UpdateDroneInput!): Drone!
   createClient(createClientInput: CreateClientInput!): Client!
   createOrder(createOrderInput: CreateOrderInput!): Order!
 }
@@ -86,6 +87,15 @@ type Order {
   address: String!
 }
 
+type OrderAmount {
+  ordersAmount: Int!
+}
+
+type OrdersCreditOrQrAmount {
+  creditAmount: Int!
+  qrAmount: Int!
+}
+
 enum PreviousState {
   USADO
   NUEVO
@@ -97,10 +107,13 @@ type Query {
   getSellers: [Seller!]!
   getDrone(name: String!): Drone!
   getDrones: [Drone!]!
+  getBestDrone: Drone!
   getClient(id: String!): Client!
   getClients: [Client!]!
   orders: [Order!]!
   order(id: String!): Order!
+  getOrdersAmountType: OrderAmount!
+  getOrdersCreditOrQrCodeAmount: OrdersCreditOrQrAmount!
 }
 
 type Seller {
@@ -110,6 +123,16 @@ type Seller {
   phoneNumber: String!
   email: String!
   gender: String!
+}
+
+input UpdateDroneInput {
+  name: String
+  subtitle: String
+  description: String
+  price: Float
+  stock: Float
+  imageUrl: String
+  id: Float!
 }
 
 type UserType {

@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { OrderService } from './order.service';
-import { OrderType } from './order.type';
+import { OrderAmountType, OrdersCreditOrQrAmountType, OrderType } from './order.type';
 import { Order } from './order.entity';
 import { CreateOrderInput } from './dto/create-order.input';
 
@@ -23,5 +23,15 @@ export class OrderResolver {
     @Args('createOrderInput') createOrderInput: CreateOrderInput,
   ): Promise<Order> {
     return this.orderService.createOrder(createOrderInput);
+  }
+
+  @Query(() => OrderAmountType)
+  async getOrdersAmountType() : Promise<OrderAmountType> {
+    return this.orderService.OrderAmount()
+  }
+
+  @Query(() => OrdersCreditOrQrAmountType)
+  async getOrdersCreditOrQrCodeAmount() : Promise<OrdersCreditOrQrAmountType> {
+    return this.orderService.CreditCardAndQrCodeAmount()
   }
 }

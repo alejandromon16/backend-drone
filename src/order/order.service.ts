@@ -32,4 +32,30 @@ export class OrderService {
   async findOne(id: string): Promise<Order> {
     return this.orderRepository.findOne(id, { relations: ['user', 'products'] });
   }
+
+  async OrderAmount() : Promise<{ordersAmount: number}> {
+    const orders  = await this.orderRepository.find({})
+    return {
+      ordersAmount: orders.length || 0
+    }
+  }
+
+  async CreditCardAndQrCodeAmount() : Promise<{creditAmount: number, qrAmount: number}> {
+    const ordersCredit = await this.orderRepository.find({
+      where: {
+        status: "CREDITO"
+      }
+    })
+
+    const ordersQr = await this.orderRepository.find({
+      where: {
+        status: "QR"
+      }
+    })
+
+    return {
+      creditAmount: ordersCredit.length,
+      qrAmount: ordersQr.length
+    }
+  }
 }
